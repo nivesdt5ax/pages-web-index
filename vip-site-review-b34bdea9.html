@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>爱游戏 · 专题介绍页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f6f5;
+            color: #1f2e2c;
+            line-height: 1.7;
+            padding: 0 1rem 2.5rem;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem 2rem 1.2rem 1.2rem;
+            box-shadow: 0 8px 30px rgba(0, 50, 50, 0.06);
+            overflow: hidden;
+        }
+
+        /* hero — 杂志感横幅 */
+        .hero {
+            background: linear-gradient(135deg, #d7ede9 0%, #b3d9d2 100%);
+            padding: 3rem 2rem 2.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            display: block;
+            width: 5rem;
+            height: 4px;
+            background: #2a7a6e;
+            margin: 1.5rem auto 0;
+            border-radius: 4px;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: #153d38;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: #2d5f58;
+            max-width: 600px;
+            margin: 0.5rem auto 0;
+            padding: 0 0.5rem;
+        }
+
+        .hero .sub {
+            font-size: 0.95rem;
+            color: #3f6f67;
+            border-top: 1px solid rgba(42, 122, 110, 0.25);
+            display: inline-block;
+            padding-top: 0.6rem;
+            margin-top: 0.75rem;
+        }
+
+        /* 网格卡片区域 */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 2.5rem 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .intro-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (min-width: 960px) {
+            .intro-grid {
+                grid-template-columns: repeat(3, 1fr);
+                padding: 3.5rem 2.5rem;
+            }
+        }
+
+        .card {
+            background: #f8fcfb;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.5rem 1.8rem;
+            box-shadow: 0 2px 10px rgba(30, 70, 65, 0.04);
+            border: 1px solid #deede9;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(30, 80, 70, 0.08);
+        }
+
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.8rem;
+            height: 2.8rem;
+            background: #c5e3dc;
+            border-radius: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #1b544b;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #1b4e46;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .card p {
+            color: #2e4944;
+            font-size: 0.98rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .note {
+            display: block;
+            font-size: 0.85rem;
+            color: #4f736c;
+            background: #ecf5f2;
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+            margin-top: 0.7rem;
+        }
+
+        /* 背景说明区域 —— 穿插在卡片下方 */
+        .context-block {
+            padding: 0 1.5rem 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .context-block {
+                padding: 0 2.5rem 2.5rem;
+            }
+        }
+
+        .context-card {
+            background: #e8f2ef;
+            border-radius: 1.8rem;
+            padding: 1.8rem 2rem;
+            border-left: 6px solid #2a7a6e;
+        }
+
+        .context-card h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #1b4e46;
+            margin-bottom: 0.75rem;
+        }
+
+        .context-card p {
+            color: #1f3e39;
+            max-width: 680px;
+        }
+
+        .context-card .tag {
+            display: inline-block;
+            background: #cde3dd;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #1a544a;
+            margin-right: 0.4rem;
+            margin-top: 0.8rem;
+        }
+
+        /* FAQ 摘要 + 尾句 */
+        .faq-snippet {
+            padding: 0.5rem 1.5rem 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .faq-snippet {
+                padding: 0.5rem 2.5rem 2.5rem;
+            }
+        }
+
+        .faq-snippet details {
+            background: #f4faf8;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid #d2e7e1;
+        }
+
+        .faq-snippet summary {
+            font-weight: 500;
+            color: #1b4e46;
+            cursor: pointer;
+            padding: 0.3rem 0;
+        }
+
+        .faq-snippet details p {
+            color: #2d524b;
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        /* 页尾 — 访问提示 */
+        .footer-note {
+            background: #f1f9f6;
+            padding: 1.8rem 2rem;
+            text-align: center;
+            border-top: 1px solid #d0e3de;
+        }
+
+        .footer-note p {
+            color: #1d423c;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-note .inline-link {
+            color: #1b6b5e;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #2a7a6e;
+            padding-bottom: 1px;
+        }
+
+        .footer-note .inline-link:hover {
+            background: #d6ede6;
+            border-bottom-width: 2px;
+        }
+
+        .footer-note .meta {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: #577e76;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 2rem 1rem 1.8rem; }
+            .context-card { padding: 1.2rem 1.2rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 首页横幅 hero -->
+        <div class="hero">
+            <h1>爱游戏 · 日常对照</h1>
+            <p>一份从查询、对照与延伸阅读出发的专题备忘</p>
+            <span class="sub">杂志式整理 · 蓝绿网格</span>
+        </div>
+
+        <!-- 三段自然介绍 + 网格卡片 -->
+        <div class="intro-grid">
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>日常查询参考</h3>
+                <p>快速检索信息、对比版本或查找常见说明，围绕实用场景提供整理好的条目。省去反复翻找的麻烦。</p>
+                <span class="note">📌 查询清单 · 可作备忘录</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>对照与归类</h3>
+                <p>将相近内容并排展示，区分易混淆概念。适合需要横向比较或梳理条目逻辑的时刻，保持页面清晰。</p>
+                <span class="note">📌 对照表思路</span>
+            </div>
+            <div class="card">
+                <div class="card-icon">📖</div>
+                <h3>延伸阅读片段</h3>
+                <p>每段介绍附带背景或补充链接，方便进一步了解。不做长篇堆砌，只提取关键线索，由你决定深入方向。</p>
+                <span class="note">📌 选读式卡片</span>
+            </div>
+        </div>
+
+        <!-- 背景说明 —— 更多上下文 -->
+        <div class="context-block">
+            <div class="context-card">
+                <h2>为什么做这类整理</h2>
+                <p>许多时候我们需要的不是大而全的指南，而是一份可以随手查阅、对照的参考页。爱游戏在信息呈现上偏向简明：把查询、对比和延伸阅读分成独立模块，减少干扰。这个页面的结构模仿了杂志专题中“背景 + 卡片 + 摘要”的节奏，让阅读更接近浏览笔记。</p>
+                <span class="tag">📎 专题式</span>
+                <span class="tag">🧩 卡片网格</span>
+                <span class="tag">🌿 蓝绿点缀</span>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要：两三个简短问答，延续杂志感 -->
+        <div class="faq-snippet">
+            <details>
+                <summary>✶ 这个页面是做什么用的？</summary>
+                <p>这是爱游戏的一个介绍型页面，用杂志式的卡片和说明段落展示日常查询、对照参考与延伸阅读三种场景。内容经过整理，但不代替原站功能。</p>
+            </details>
+            <details>
+                <summary>✶ 信息是否保持更新？</summary>
+                <p>页面基于当前版本的内容框架编写，具体细节建议直接参考主站。如有变动，以实际页面为准。</p>
+            </details>
+            <details>
+                <summary>✶ 如何查看更多内容？</summary>
+                <p>你可以从下文链接进入爱游戏，浏览完整信息。当前页面仅作为专题化的简介。</p>
+            </details>
+        </div>
+
+        <!-- 页尾访问提示，自然嵌入 a 标签，文本严格为「爱游戏」 -->
+        <div class="footer-note">
+            <p>
+                若需要查询更完整的条目、进行深度对照或获取延伸资源，可前往
+                <a href="https://vip-site-igame.com" class="inline-link">爱游戏</a>
+                ，浏览适合你的内容板块。
+            </p>
+            <span class="meta">杂志专题 · 蓝绿网格 · 日常查询/对照/延伸</span>
+        </div>
+    </div>
+</body>
+</html>
